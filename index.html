@@ -11,6 +11,15 @@
 <body>
   <div id="shopping-list">
     <h1>{{ header || 'welcome'}}</h1>
+    <input type="text" v-model="newItem" placeholder="Add an item">
+    <strong>Priority</strong>
+    <label><input type="radio" v-model="newItemPriority" value="high">High</label>
+    <label><input type="radio" v-model="newItemPriority" value="low">Low</label>
+    <label></label>
+    {{newItem}} | {{newItemPriority}}
+    <ul>
+      <li v-for="(item, key) in items" :key="item.id">{{key}} {{item.label}}</li>
+    </ul>
   </div>
 
   <script src="https://unpkg.com/vue@3"></script>
@@ -18,7 +27,22 @@
     const shoppingListApp = Vue.createApp({
       data() {
         return {
-          header: 'Shopping List App'
+          header: 'Shopping List App',
+          newItem: '',
+          newItemPriority: 'low',
+          items: [{
+              id: 1,
+              label: '10 party hats'
+            },
+            {
+              id: 2,
+              label: '2 board games'
+            },
+            {
+              id: 3,
+              label: '20 cups'
+            },
+          ]
         }
       }
     }).mount('#shopping-list')
